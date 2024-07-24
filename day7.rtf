@@ -1,0 +1,600 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset161 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 '''\par
+\par
+1. List Comprehensions\par
+a. Write a list comprehension that generates a list of squares of the numbers from 1 to 10.\par
+b. Write a list comprehension to extract all the vowels from the string "hello world".\par
+\par
+\par
+'''\par
+\par
+l1=[x*x for x in range(1,11)]\par
+print(l1)\par
+\par
+l2=[a for a in 'hello world' if a in ('a','e','i','o','u')  ]\par
+print(l2)\par
+\par
+\par
+'''\par
+\par
+2. Dictionary Comprehension\par
+a. Create a dictionary where the keys are numbers from 1 to 5 and the values are the cubes \par
+of the keys.\par
+b. Create a dictionary where the keys are the \f1\u976?irst letters of the words in the list ["apple", \par
+"banana", "cherry"] and the values are the words themselves.\par
+\par
+'''\par
+\par
+d1=\{x: x*x*x for x in [1,2,3,4,5]\}\par
+print(d1)\par
+\par
+d2 =\{x[0]: x for x in ["apple", \par
+"banana", "cherry"] \}\par
+\par
+print(d2)\par
+\par
+'''\par
+\par
+3. Lambda Functions\par
+a. Write a lambda function that adds 10 to a given number and use it to add 10 to the \par
+number 5.\par
+b. Write a lambda function that checks if a number is even and use it to test the number 4.\par
+\par
+'''\par
+\par
+x=lambda y:y+10 \par
+print(x(5))\par
+\par
+t= lambda p: f"\{p\} is even" if p %2==0 else f"\{x\} is odd"\par
+print(t(4))\par
+\par
+'''\par
+\par
+4. Filter Function\par
+a. Use the \u976?ilter function to \u976?ilter out the odd numbers from the list [1, 2, 3, 4, 5, 6, 7, 8, 9, \par
+10].\par
+b. Use the \u976?ilter function to remove all strings shorter than 4 characters from the list ["cat", \par
+"dog", "elephant", "rat"].\par
+\par
+'''\par
+\par
+seq=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\par
+result = filter(lambda x: x % 2 != 0, seq)\par
+print(list(result))\par
+\par
+seq2=["cat", \par
+"dog", "elephant", "rat"]\par
+def fun1(s):\par
+    if len(s) >= 4 :\par
+        return True\par
+    else :\par
+        return False\par
+        \par
+result2=filter(fun1,seq2)\par
+print(list(result2))\par
+\par
+'''\par
+\par
+5. Map Function\par
+a. Use the map function to double all the numbers in the list [1, 2, 3, 4, 5].\par
+b. Use the map function to convert a list of integers [1, 2, 3] to their corresponding string \par
+representations.\par
+\par
+'''\par
+\par
+def d(n):\par
+    return n+n\par
+l=[1, 2, 3, 4, 5]\par
+result1=map(d,l)\par
+print(list(result1))\par
+\par
+\par
+\par
+l2=[1, 2, 3]\par
+result2=map(str,l2)\par
+print(list(result2))\par
+\par
+'''\par
+\par
+6. Reduce Function\par
+a. Use the reduce function to \u976?ind the product of the numbers in the list [1, 2, 3, 4, 5].\par
+b. Use the reduce function to concatenate a list of strings ["Hello", "World", "from", \par
+"Python"] into a single string.\par
+\par
+'''\par
+import functools\par
+l1=[1, 2, 3, 4, 5]\par
+p=functools.reduce(lambda x,y:x*y,l1)\par
+print(p)\par
+\par
+l2= ["Hello", "World", "from", \par
+"Python"]\par
+p2=functools.reduce(lambda x,y:x+y,l2)\par
+print(p2)\par
+\par
+'''\par
+\par
+7. Generator Functions\par
+a. Create a generator function that yields the \u976?irst 5 even numbers.\par
+b. Create a generator function that yields numbers in the Fibonacci sequence up to the \par
+10th number.\par
+\par
+'''\par
+\par
+def fun1():\par
+    x=2\par
+    count=0 \par
+    while count<5:\par
+       yield(x)\par
+       x+=2\par
+       count+=1\par
+    \par
+\par
+y=fun1()\par
+print(next(y))\par
+print(next(y))\par
+print(next(y))\par
+print(next(y))\par
+print(next(y))\par
+\par
+\par
+\par
+def fib(limit): \par
+\tab\par
+\tab a, b,count = 0, 1,0\par
+\tab\par
+\tab while count <= limit: \par
+\tab\tab yield a \par
+\tab\tab a, b = b, a + b \par
+\tab\tab count+=1\par
+\par
+\par
+for i in fib(10):  \par
+    print(i)\par
+\par
+\par
+'''\par
+\par
+8. Handling Exceptions\par
+a. Write a function that takes two numbers and returns their division, handling the division \par
+by zero exception.\par
+b. Write a function that reads a \u976?ile and handles the \u976?ile not found exception\par
+\par
+'''\par
+\par
+def fun1(a,b):\par
+    try:\par
+        c=a/b\par
+        return c\par
+    except :\par
+        print("division by zero")\par
+        \par
+fun1(10,0)\par
+\par
+def fun2(file):\par
+    try:\par
+       with open(file) as file:\par
+           f=file.read()\par
+           print(f)\par
+    except:\par
+        print("file not found error")\par
+        \par
+    '''\par
+\par
+10. Regular Expressions\par
+a. Use regular expressions to \u976?ind all the words starting with 'a' in the string "apple and \par
+banana are amazing".\par
+b. Use regular expressions to extract all the email addresses from the string "contact us at \par
+email@example.com or admin@site.org".\par
+\par
+'''\par
+\par
+\par
+words_starting_with_a = re.findall(r'\\ba\\w+', "apple and banana are amazing") \par
+ \par
+print("Words starting with 'a':", words_starting_with_a) \par
+\par
+\par
+email_addresses = re.findall(r'\\b[\\w.-]+@[a-zA-Z-]+\\.[a-zA-Z.]\{2,6\}\\b', "contact us at email@example.com or admin@site.org") \par
+ \par
+print("Email addresses found:", email_addresses) \par
+\par
+'''\par
+\par
+11. Classes and Objects\par
+a. Create a class Person with attributes name and age. Instantiate an object of this class and \par
+print its attributes.\par
+b. Create a class Car with attributes make, model, and year. Instantiate an object of this \par
+class and print its attributes.\par
+\par
+'''\par
+class Person:\par
+    \par
+     def __init__(self, name, age):\par
+       self.name = name\par
+       self.age = age\par
+       \par
+     def pa(self):\par
+         print('name : ',self.name)\par
+         print('age :',self.age)\par
+\par
+p1=Person('abhinav',21)\par
+p1.pa()\par
+\par
+\par
+class car:\par
+    def __init__(self,make,model,year):\par
+        self.make=make\par
+        self.model=model\par
+        self.year=year\par
+        \par
+\par
+\par
+  '''\par
+\par
+12. Inheritance\par
+a. Create a class Employee that inherits from the Person class and adds an attribute salary. \par
+Instantiate an object of Employee and print all its attributes.\par
+b. Create a class Manager that inherits from Employee and adds an attribute department. \par
+Instantiate an object of Manager and print all its attributes\par
+\par
+'''\par
+class Person(object):\par
+\par
+\tab # Constructor\par
+\tab def __init__(self, name):\par
+\tab\tab self.name = name\par
+\par
+\tab # To get name\par
+\tab def getName(self):\par
+\tab\tab return self.name\par
+\par
+\tab # To check if this person is an employee\par
+\tab def isEmployee(self):\par
+\tab\tab return False\par
+\par
+\par
+# Inherited or Subclass (Note Person in bracket)\par
+class Employee(Person):\par
+\par
+\tab # Here we return true\par
+\tab def isEmployee(self):\par
+\tab\tab return True\par
+\par
+\par
+# Driver code\par
+emp = Person("Geek1") # An Object of Person\par
+print(emp.getName(), emp.isEmployee())\par
+\par
+emp = Employee("Geek2") # An Object of Employee\par
+print(emp.getName(), emp.isEmployee())\par
+\par
+class manager(object):\par
+    def __init__(self,name,id):\par
+        self.id=id\par
+        self.name=name\par
+    \par
+    \par
+class Employee(manager):\par
+    def __init__(self,name,id,dept):\par
+        self.dept=dept\par
+        manager.__init__(self,name,id)\par
+        \par
+m=manager('abhinav',1)\par
+e=Employee('abhinav',1,'it')\par
+\par
+'''\par
+\par
+13. Static Methods\par
+a. Add a static method to the Person class that returns a greeting message.\par
+b. Add a static method to the MathUtils class that returns the square of a given number.\par
+\par
+\par
+'''\par
+import Math\par
+\par
+class person:\par
+    @staticmethod\par
+    def p():\par
+        print('gretting message')\par
+\par
+person.p()\par
+\par
+class Maths(): \par
+      \par
+    @staticmethod\par
+    def addNum(num1): \par
+        return math.sqrt(num1)\par
+\par
+Maths.addNum(25)\par
+\par
+'''\par
+\par
+14. Class Methods\par
+a. Add a class method to the Person class that returns a new instance of Person with a \par
+default name and age.\par
+b. Add a class method to the Book class that creates a new Book instance from a given title \par
+and autho\par
+\par
+'''\par
+class Person:\par
+    name='abhinav'\par
+    age=22\par
+    @classmethod\par
+    def fun(cls):\par
+        print(cls.name)\par
+        print(cls.age)\par
+\par
+Person.fun()\par
+\par
+\par
+class book:\par
+    title='a'\par
+    auth='b'\par
+    @classmethod\par
+    def fun(cls):\par
+        print(cls.title)\par
+        print(cls.auth)\par
+\par
+book.fun()\par
+\par
+Question 15: Magic Methods \par
+ \par
+# a. Override __str__ method in Person class to return a formatted string \par
+ \par
+class Person: \par
+ \par
+    def __init__(self, name, age): \par
+ \par
+        self.name = name \par
+ \par
+        self.age = age \par
+ \par
+ \par
+ \par
+    def __str__(self): \par
+ \par
+        return f"Person: \{self.name\}, Age: \{self.age\}" \par
+ \par
+ \par
+ \par
+person_obj = Person("David", 40) \par
+ \par
+print(person_obj)  # Output: Person: David, Age: 40 \par
+ \par
+ \par
+ \par
+# b. Override __add__ method in Vector class to add two vectors together \par
+ \par
+class Vector: \par
+ \par
+    def __init__(self, x, y): \par
+ \par
+        self.x = x \par
+ \par
+        self.y = y \par
+ \par
+ \par
+ \par
+    def __add__(self, other): \par
+ \par
+        return Vector(self.x + other.x, self.y + other.y) \par
+ \par
+ \par
+ \par
+vec1 = Vector(1, 2) \par
+ \par
+vec2 = Vector(3, 4) \par
+ \par
+result_vec = vec1 + vec2 \par
+ \par
+print("Vector addition result:", result_vec.x, result_vec.y) \par
+ \par
+ \par
+ \par
+# Question 16: Context Managers \par
+ \par
+# a. Create a context manager to print "Entering" and "Exiting" \par
+ \par
+from contextlib import contextmanager \par
+ \par
+ \par
+ \par
+@contextmanager \par
+ \par
+def custom_context(): \par
+ \par
+    print("Entering") \par
+ \par
+    yield \par
+ \par
+    print("Exiting") \par
+ \par
+ \par
+ \par
+with custom_context(): \par
+ \par
+    print("Inside context") \par
+ \par
+ \par
+ \par
+# b. Create a context manager to temporarily change current directory \par
+ \par
+import os \par
+ \par
+ \par
+ \par
+@contextmanager \par
+ \par
+def change_directory(directory): \par
+ \par
+    current_dir = os.getcwd() \par
+ \par
+    try: \par
+ \par
+        os.chdir(directory) \par
+ \par
+        yield \par
+ \par
+    finally: \par
+ \par
+        os.chdir(current_dir) \par
+ \par
+ \par
+ \par
+# Example usage: \par
+ \par
+with change_directory("/tmp"): \par
+ \par
+    print("Current working directory:", os.getcwd()) \par
+ \par
+ \par
+ \par
+# Question 17: Iterators \par
+ \par
+# a. Create a custom iterator to return numbers from 1 to 5 \par
+ \par
+class CountIterator: \par
+ \par
+    def __init__(self): \par
+ \par
+        self.count = 0 \par
+ \par
+ \par
+ \par
+    def __iter__(self): \par
+ \par
+        return self \par
+ \par
+ \par
+ \par
+    def __next__(self): \par
+ \par
+        if self.count >= 5: \par
+ \par
+            raise StopIteration \par
+ \par
+        self.count += 1 \par
+ \par
+        return self.count \par
+ \par
+ \par
+ \par
+count_iter = CountIterator() \par
+ \par
+print("Custom iterator numbers:", list(count_iter)) \par
+ \par
+ \par
+ \par
+# b. Create a custom iterator to return characters from a string one by one \par
+ \par
+class CharIterator: \par
+ \par
+    def __init__(self, string): \par
+ \par
+        self.string = string \par
+ \par
+        self.index = 0 \par
+ \par
+ \par
+ \par
+    def __iter__(self): \par
+ \par
+        return self \par
+ \par
+ \par
+ \par
+    def __next__(self): \par
+ \par
+        if self.index >= len(self.string): \par
+ \par
+            raise StopIteration \par
+ \par
+        result = self.string[self.index] \par
+ \par
+        self.index += 1 \par
+ \par
+        return result \par
+ \par
+ \par
+ \par
+char_iter = CharIterator("Hello") \par
+ \par
+print("Custom iterator characters:", list(char_iter)) \par
+ \par
+ \par
+ \par
+# Question 18: Modules and Packages \par
+ \par
+# a. Create a simple module my_module.py with a function greet that prints "Hello, World!".  \par
+ \par
+Import and use this function in another script. \par
+ \par
+ \par
+ \par
+# File: my_module.py \par
+ \par
+ \par
+ \par
+def greet(): \par
+ \par
+    print("Hello, World!") \par
+ \par
+# File: main.py \par
+ \par
+from my_module import greet \par
+ \par
+ \par
+ \par
+# Calling the greet function from my_module \par
+ \par
+greet() \par
+ \par
+# b \par
+ \par
+ \par
+ \par
+# Question 19: Date and Time \par
+ \par
+# a. Get current date and time in "YYYY-MM-DD HH:MM" format \par
+ \par
+from datetime import datetime \par
+ \par
+ \par
+ \par
+current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M") \par
+ \par
+print("Current date and time:", current_datetime) \par
+ \par
+ \par
+ \par
+# b. Calculate days between two given dates \par
+ \par
+ \par
+ \par
+# Question 20: Collections \par
+ \par
+# a. Use Counter class to count characters in "abracadabra" \par
+ \par
+from collections import Counter \par
+ \par
+ \par
+ \par
+char_counts = Counter("abracadabra") \par
+ \par
+print("Character counts:", char_counts) \par
+ \par
+ \par
+ \par
+# b. Use defaultdict class to create dictionary with default value of 0 for new keys \par
+ \par
+from collections import defaultdict \par
+ \par
+ \par
+ \par
+default_dict = defaultdict(int) \par
+ \par
+print("Default dictionary example:", dict(default_dict)) \f0\par
+}
+ 

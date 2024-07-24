@@ -1,0 +1,284 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Wingdings;}{\f2\fnil\fcharset161 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 1. Data Manipulation with Pandas:\par
+\f1\'b7\f0  Given a dataset in the form of a dictionary, convert it to a DataFrame and perform \par
+the following tasks:\par
+\f1\'a7\f0  Remove rows with missing values.\par
+\f1\'a7\f0  Group the data by 'Product' and calculate the total sales for each product.\par
+\f1\'a7\f0  Sort the results by total sales in descending order.\par
+\f1\'b7\f0  Create a pivot table that shows the sum of sales for each product, broken down \par
+by month.\par
+\par
+import pandas as pd\par
+import datetime\par
+import numpy as np\par
+import functools\par
+import matplotlib.pyplot as plt\par
+\par
+df = pd.DataFrame( \{\par
+    'Product': ['Product A', 'Product B', 'Product C', 'Product A', 'Product B', 'Product C'],\par
+    'Sales': [10, 20, 30, 15, 25, 35],\par
+    'Date': ['1-7-2024', '1-7-2024', '1-7-2024', \par
+             '2-8-2024', '2-8-2024', '2-8-2024']\par
+\})\par
+\par
+df.dropna()\par
+\par
+gr=df.groupby(['Product']).sum().sort_values(by='Sales',ascending=False)\par
+df['Date']=pd.to_datetime(df['Date'])\par
+df['month']=df['Date'].dt.month\par
+pivot_table = df.pivot_table(values='Sales', index='Product', columns='month', aggfunc='sum', fill_value=0)\par
+pivot_table\par
+\par
+\par
+\par
+2. Data Cleaning:\par
+\f1\'b7\f0  Write a function that takes a DataFrame with various types of data (numeric, \par
+text, dates) and performs the following cleaning steps:\par
+\f1\'a7\f0  Replace all empty strings with NaN.\par
+\f1\'a7\f0  Fill numeric NaNs with the mean of their column.\par
+\f1\'a7\f0  Convert all text to lowercase.\par
+\f1\'b7\f0  Write a function that detects and removes outliers from a numeric column in a \par
+DataFrame using the IQR method.\par
+\par
+data = \{\par
+    'Product ID': [101, 102, 103, 104],\par
+    'Product Name': ['Widget A', 'Widget B', 'Widget C', 'Widget D'],\par
+    'Price': [25.50, 40.75, 19.99,np.NaN],\par
+    'In Stock': [True, False, True, True],\par
+    'Launch Date': ['2023-5-4', '2023-6-15', '2023-7-6', '2023-8-5']\par
+\}\par
+\par
+\par
+df = pd.DataFrame(data)\par
+df.fillna(value=int(df['Price'].mean()),inplace=True)\par
+df['Product Name']=df['Product Name'].str.lower()\par
+def removal_box_plot(df, column, threshold):\par
+  df=df[df[column]>=threshold]\par
+\par
+\par
+3. Lambda Functions and Map-Reduce:\par
+\f1\'b7\f0  Use a lambda function to \f2\u976?ilter out even numbers from a list of integers.\par
+\f1\'b7\f0  Use the reduce function to calculate the product of the remaining numbers.\par
+\f1\'b7\f0  Use a lambda function with the \f2\u976?ilter function to remove words from a list that \par
+are shorter than 4 characters. Then, use reduce to concatenate the remaining \par
+words into a single string.\par
+\par
+my_list = [12, 65, 54, 39, 102, 339, 221, 50, 70]\par
+result = list(filter(lambda x: (x % 2 != 0), my_list))\par
+print(result)\par
+result2=functools.reduce(lambda a,b:a*b,result)\par
+print(result2)\par
+\par
+l=['happy','abhi','ruth','cat','dog']\par
+r3=list(filter(lambda x : len(x)>=4,l))\par
+r4=functools.reduce(lambda a,b:a+b,r3)\par
+r4\par
+\par
+  \par
+\par
+4. Data Visualization:\par
+\f1\'b7\f0  Using Matplotlib, create a line chart showing the trend of sales over time from \par
+the given dataset.\par
+\f1\'b7\f0  Customize the chart with labels, title, and legend.\par
+\f1\'b7\f0  Create a scatter plot showing the relationship between two numerical columns \par
+in a DataFrame. Add a trend line to the scatter plot.\par
+\par
+\par
+data = \{\par
+    'Date': ['2024-01-01', '2024-01-01', '2024-02-01', '2024-02-01', '2024-03-01'],\par
+    'Product ID': [101, 102, 101, 103, 102],\par
+    'Product Name': ['Widget A', 'Widget B', 'Widget A', 'Widget C', 'Widget B'],\par
+    'Quantity Sold': [50, 30, 70, 20, 90],\par
+    'Sales Amount': [500, 300, 700, 200, 900],\par
+    'Customer ID': ['C001', 'C002', 'C003', 'C001', 'C004'],\par
+    'Region': ['North', 'South', 'East', 'West', 'North']\par
+\}\par
+\par
+df = pd.DataFrame(data)\par
+\par
+\par
+plt.plot(df['Date'], df['Sales Amount'])\par
+plt.xlabel("time") # add X-axis label\par
+plt.ylabel("sales") # add Y-axis label\par
+plt.title("line chart") # add title\par
+plt.show()\par
+\par
+import matplotlib.pyplot as plt\par
+import seaborn as sns\par
+\par
+x =[5, 7, 8, 7, 2, 17, 2, 9,\par
+\tab 4, 11, 12, 9, 6] \par
+\par
+y =[99, 86, 87, 88, 100, 86, \par
+\tab 103, 87, 94, 78, 77, 85, 86]\par
+\par
+sns.regplot(x=x, y=y, ci=False, line_kws=\{'color':'red'\})\par
+\par
+\par
+5. Data Aggregation:\par
+\f1\'b7\f0  Given a list of dictionaries representing transactions, write a function to \par
+aggregate the total amount spent by each user.\par
+\f1\'b7\f0  Write a function that calculates the moving average of the total amount spent by \par
+each user over a speci\f2\u976?ied window size\par
+\par
+data = \{\par
+    'Date': ['2024-01-01', '2024-01-01', '2024-02-01', '2024-02-01', '2024-03-01'],\par
+    'Product ID': [101, 102, 101, 103, 102],\par
+    'Product Name': ['Widget A', 'Widget B', 'Widget A', 'Widget C', 'Widget B'],\par
+    'Quantity Sold': [50, 30, 70, 20, 90],\par
+    'Sales Amount': [500, 300, 700, 200, 900],\par
+    'Customer ID': ['C001', 'C002', 'C003', 'C001', 'C004'],\par
+    'Region': ['North', 'South', 'East', 'West', 'North']\par
+\}\par
+\par
+df = pd.DataFrame(data)\par
+df[['Customer ID','Sales Amount']].groupby(['Customer ID']).agg('sum')\par
+\par
+6. Exception Handling:\par
+\f1\'b7\f0  Write a function that handles division by zero and returns a meaningful error \par
+message when a division by zero occurs.\par
+\f1\'b7\f0  Write a function that takes a list of \f2\u976?ile paths and attempts to open each one, \par
+handling FileNotFoundError, PermissionError, and IOError, and logging the \par
+results.\par
+\par
+def fun1():\par
+  try:\par
+    c=a/b\par
+    return c\par
+  except:\par
+    print("division by zero not possible")\par
+import logging\par
+ \par
+\par
+logging.basicConfig(filename="newfile.log",\par
+                    format='%(asctime)s %(message)s',\par
+                    filemode='w')\par
+ \par
+\par
+logger = logging.getLogger()\par
+ \par
+\par
+logger.setLevel(logging.DEBUG)\par
+def fun2(l):\par
+  for i in l:\par
+    try:\par
+     f=open(i)\par
+    except FileNotFoundError:\par
+      print("file not found")\par
+      logger.error("file not found")\par
+    except PermissionError:\par
+      print("Permission error")\par
+      logger.error("Permission error")\par
+    except IOError:\par
+      print("IOerror")\par
+      logger.error("IOerror")\par
+\par
+\par
+     \par
+\par
+7. Working with Dates:\par
+\f1\'b7\f0  Write a function that takes a list of date strings in various formats and converts \par
+them to a standardized format (YYYY-MM-DD).\par
+\f1\'b7\f0  Write a function that calculates the number of business days between two given \par
+dates, excluding weekends and holidays.\par
+\par
+from datetime import datetime\par
+def fun3(l):\par
+  for i in l:\par
+     d=datetime.strptime(i,"%Y %m %d")\par
+     return d\par
+def fun4(test_date1,test_date2):\par
+  test_date1=datetime.strptime(test_date1,"%Y %m %d")\par
+  test_date2=datetime.strptime(test_date2,"%Y %m %d")\par
+  # generating dates\par
+  dates = (test_date1 + timedelta(idx + 1)\par
+         for idx in range((test_date2 - test_date1).days))\par
+ \par
+# summing all weekdays\par
+  res = sum(1 for day in dates if day.weekday() < 5)\par
+ \par
+# printing\par
+  print("Total business days in range : " + str(res))\par
+\par
+\par
+8. ETL Process:\par
+\f1\'b7\f0  Simulate an ETL process using Python that extracts data from a list of \par
+dictionaries, transforms it by normalizing numeric \f2\u976?ields, and loads it into a \par
+Pandas DataFrame.\par
+\f1\'b7\f0  Extend the ETL process to include a validation step that checks for data quality \par
+issues (e.g., missing values, outliers) before loading the data into the DataFrame.\par
+\par
+# create a list of dictionaries with \par
+# student id as key and name as value\par
+import pandas as pd\par
+from sklearn.preprocessing import MinMaxScaler\par
+import numpy as np\par
+\par
+def extract_data(transactions):\par
+    """\par
+    Extracts data from a list of dictionaries.\par
+    """\par
+    return pd.DataFrame(transactions)\par
+\par
+def normalize_numeric_fields(df, numeric_fields):\par
+    """\par
+    Normalizes numeric fields using Min-Max scaling.\par
+    """\par
+    scaler = MinMaxScaler()\par
+    df[numeric_fields] = scaler.fit_transform(df[numeric_fields])\par
+    return df\par
+\par
+def validate_data(df):\par
+    """\par
+    Validates data for quality issues such as missing values and outliers.\par
+    """\par
+    issues = []\par
+    \par
+    # Check for missing values\par
+    if df.isnull().values.any():\par
+        issues.append("Missing values detected")\par
+    \par
+    # Check for outliers (using z-score)\par
+    z_scores = np.abs((df[numeric_fields] - df[numeric_fields].mean()) / df[numeric_fields].std())\par
+    if (z_scores > 3).any().any():\par
+        issues.append("Outliers detected")\par
+    \par
+    return issues\par
+\par
+def load_data(df):\par
+    """\par
+    Loads data into a DataFrame (could be extended to load into a database).\par
+    """\par
+    return df\par
+\par
+# Sample data\par
+transactions = [\par
+    \{'Date': '2024-01-01', 'Product ID': 101, 'Product Name': 'Widget A', 'Quantity Sold': 50, 'Sales Amount': 500, 'Customer ID': 'C001', 'Region': 'North'\},\par
+    \{'Date': '2024-01-01', 'Product ID': 102, 'Product Name': 'Widget B', 'Quantity Sold': 30, 'Sales Amount': 300, 'Customer ID': 'C002', 'Region': 'South'\},\par
+    \{'Date': '2024-02-01', 'Product ID': 101, 'Product Name': 'Widget A', 'Quantity Sold': 70, 'Sales Amount': 700, 'Customer ID': 'C003', 'Region': 'East'\},\par
+    \{'Date': '2024-02-01', 'Product ID': 103, 'Product Name': 'Widget C', 'Quantity Sold': 20, 'Sales Amount': 200, 'Customer ID': 'C001', 'Region': 'West'\},\par
+    \{'Date': '2024-03-01', 'Product ID': 102, 'Product Name': 'Widget B', 'Quantity Sold': 90, 'Sales Amount': 900, 'Customer ID': 'C004', 'Region': 'North'\},\par
+    \{'Date': '2024-04-01', 'Product ID': 101, 'Product Name': 'Widget A', 'Quantity Sold': 80, 'Sales Amount': 800, 'Customer ID': 'C001', 'Region': 'North'\},\par
+]\par
+\par
+# Extract\par
+df = extract_data(transactions)\par
+\par
+# Transform\par
+numeric_fields = ['Quantity Sold', 'Sales Amount']\par
+df_transformed = normalize_numeric_fields(df.copy(), numeric_fields)\par
+\par
+# Validate\par
+issues = validate_data(df_transformed)\par
+if issues:\par
+    print("Data quality issues found:", issues)\par
+else:\par
+    # Load\par
+    final_df = load_data(df_transformed)\par
+    print(final_df)\par
+\par
+\par
+\par
+}
+ 

@@ -1,0 +1,657 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Wingdings;}{\f2\fnil\fcharset161 Calibri;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 1. Data Manipulation with Pandas:\par
+\f1\'b7\f0  Given a dataset in the form of a dictionary, convert it to a DataFrame and perform\par
+the following tasks:\par
+\f1\'a7\f0  Remove rows with missing values.\par
+\f1\'a7\f0  Group the data by 'Product' and calculate the total sales for each product.\par
+\f1\'a7\f0  Sort the results by total sales in descending order.\par
+\f1\'b7\f0  Create a pivot table that shows the sum of sales for each product, broken down\par
+by month.\par
+\par
+import pandas as pd\par
+import datetime\par
+import numpy as np\par
+import functools\par
+import matplotlib.pyplot as plt\par
+\par
+df = pd.DataFrame( \{\par
+    'Product': ['Product A', 'Product B', 'Product C', 'Product A', 'Product B', 'Product C'],\par
+    'Sales': [10, 20, 30, 15, 25, 35],\par
+    'Date': ['1-7-2024', '1-7-2024', '1-7-2024',\par
+             '2-8-2024', '2-8-2024', '2-8-2024']\par
+\})\par
+\par
+df.dropna()\par
+\par
+gr=df.groupby(['Product']).sum().sort_values(by='Sales',ascending=False)\par
+df['Date']=pd.to_datetime(df['Date'])\par
+df['month']=df['Date'].dt.month\par
+pivot_table = df.pivot_table(values='Sales', index='Product', columns='month', aggfunc='sum', fill_value=0)\par
+pivot_table\par
+\par
+\par
+\par
+2. Data Cleaning:\par
+\f1\'b7\f0  Write a function that takes a DataFrame with various types of data (numeric,\par
+text, dates) and performs the following cleaning steps:\par
+\f1\'a7\f0  Replace all empty strings with NaN.\par
+\f1\'a7\f0  Fill numeric NaNs with the mean of their column.\par
+\f1\'a7\f0  Convert all text to lowercase.\par
+\f1\'b7\f0  Write a function that detects and removes outliers from a numeric column in a\par
+DataFrame using the IQR method.\par
+\par
+data = \{\par
+    'Product ID': [101, 102, 103, 104],\par
+    'Product Name': ['Widget A', 'Widget B', 'Widget C', 'Widget D'],\par
+    'Price': [25.50, 40.75, 19.99,np.NaN],\par
+    'In Stock': [True, False, True, True],\par
+    'Launch Date': ['2023-5-4', '2023-6-15', '2023-7-6', '2023-8-5']\par
+\}\par
+\par
+\par
+df = pd.DataFrame(data)\par
+df.fillna(value=int(df['Price'].mean()),inplace=True)\par
+df['Product Name']=df['Product Name'].str.lower()\par
+def removal_box_plot(df, column, threshold):\par
+  df=df[df[column]>=threshold]\par
+\par
+\par
+3. Lambda Functions and Map-Reduce:\par
+\f1\'b7\f0  Use a lambda function to \f2\u976?ilter out even numbers from a list of integers.\par
+\f1\'b7\f0  Use the reduce function to calculate the product of the remaining numbers.\par
+\f1\'b7\f0  Use a lambda function with the \f2\u976?ilter function to remove words from a list that\par
+are shorter than 4 characters. Then, use reduce to concatenate the remaining\par
+words into a single string.\par
+\par
+my_list = [12, 65, 54, 39, 102, 339, 221, 50, 70]\par
+result = list(filter(lambda x: (x % 2 != 0), my_list))\par
+print(result)\par
+result2=functools.reduce(lambda a,b:a*b,result)\par
+print(result2)\par
+\par
+l=['happy','abhi','ruth','cat','dog']\par
+r3=list(filter(lambda x : len(x)>=4,l))\par
+r4=functools.reduce(lambda a,b:a+b,r3)\par
+r4\par
+\par
+\par
+\par
+4. Data Visualization:\par
+\f1\'b7\f0  Using Matplotlib, create a line chart showing the trend of sales over time from\par
+the given dataset.\par
+\f1\'b7\f0  Customize the chart with labels, title, and legend.\par
+\f1\'b7\f0  Create a scatter plot showing the relationship between two numerical columns\par
+in a DataFrame. Add a trend line to the scatter plot.\par
+\par
+\par
+data = \{\par
+    'Date': ['2024-01-01', '2024-01-01', '2024-02-01', '2024-02-01', '2024-03-01'],\par
+    'Product ID': [101, 102, 101, 103, 102],\par
+    'Product Name': ['Widget A', 'Widget B', 'Widget A', 'Widget C', 'Widget B'],\par
+    'Quantity Sold': [50, 30, 70, 20, 90],\par
+    'Sales Amount': [500, 300, 700, 200, 900],\par
+    'Customer ID': ['C001', 'C002', 'C003', 'C001', 'C004'],\par
+    'Region': ['North', 'South', 'East', 'West', 'North']\par
+\}\par
+\par
+df = pd.DataFrame(data)\par
+\par
+\par
+plt.plot(df['Date'], df['Sales Amount'])\par
+plt.xlabel("time") # add X-axis label\par
+plt.ylabel("sales") # add Y-axis label\par
+plt.title("line chart") # add title\par
+plt.show()\par
+\par
+import matplotlib.pyplot as plt\par
+import seaborn as sns\par
+\par
+x =[5, 7, 8, 7, 2, 17, 2, 9,\par
+\tab 4, 11, 12, 9, 6]\par
+\par
+y =[99, 86, 87, 88, 100, 86,\par
+\tab 103, 87, 94, 78, 77, 85, 86]\par
+\par
+sns.regplot(x=x, y=y, ci=False, line_kws=\{'color':'red'\})\par
+\par
+\par
+5. Data Aggregation:\par
+\f1\'b7\f0  Given a list of dictionaries representing transactions, write a function to\par
+aggregate the total amount spent by each user.\par
+\f1\'b7\f0  Write a function that calculates the moving average of the total amount spent by\par
+each user over a speci\f2\u976?ied window size\par
+\par
+data = \{\par
+    'Date': ['2024-01-01', '2024-01-01', '2024-02-01', '2024-02-01', '2024-03-01'],\par
+    'Product ID': [101, 102, 101, 103, 102],\par
+    'Product Name': ['Widget A', 'Widget B', 'Widget A', 'Widget C', 'Widget B'],\par
+    'Quantity Sold': [50, 30, 70, 20, 90],\par
+    'Sales Amount': [500, 300, 700, 200, 900],\par
+    'Customer ID': ['C001', 'C002', 'C003', 'C001', 'C004'],\par
+    'Region': ['North', 'South', 'East', 'West', 'North']\par
+\}\par
+\par
+df = pd.DataFrame(data)\par
+df[['Customer ID','Sales Amount']].groupby(['Customer ID']).agg('sum')\par
+\par
+6. Exception Handling:\par
+\f1\'b7\f0  Write a function that handles division by zero and returns a meaningful error\par
+message when a division by zero occurs.\par
+\f1\'b7\f0  Write a function that takes a list of \f2\u976?ile paths and attempts to open each one,\par
+handling FileNotFoundError, PermissionError, and IOError, and logging the\par
+results.\par
+\par
+def fun1():\par
+  try:\par
+    c=a/b\par
+    return c\par
+  except:\par
+    print("division by zero not possible")\par
+import logging\par
+\par
+\par
+logging.basicConfig(filename="newfile.log",\par
+                    format='%(asctime)s %(message)s',\par
+                    filemode='w')\par
+\par
+\par
+logger = logging.getLogger()\par
+\par
+\par
+logger.setLevel(logging.DEBUG)\par
+def fun2(l):\par
+  for i in l:\par
+    try:\par
+     f=open(i)\par
+    except FileNotFoundError:\par
+      print("file not found")\par
+      logger.error("file not found")\par
+    except PermissionError:\par
+      print("Permission error")\par
+      logger.error("Permission error")\par
+    except IOError:\par
+      print("IOerror")\par
+      logger.error("IOerror")\par
+\par
+\par
+\par
+\par
+7. Working with Dates:\par
+\f1\'b7\f0  Write a function that takes a list of date strings in various formats and converts\par
+them to a standardized format (YYYY-MM-DD).\par
+\f1\'b7\f0  Write a function that calculates the number of business days between two given\par
+dates, excluding weekends and holidays.\par
+\par
+from datetime import datetime\par
+def fun3(l):\par
+  for i in l:\par
+     d=datetime.strptime(i,"%Y %m %d")\par
+     return d\par
+def fun4(test_date1,test_date2):\par
+  test_date1=datetime.strptime(test_date1,"%Y %m %d")\par
+  test_date2=datetime.strptime(test_date2,"%Y %m %d")\par
+  # generating dates\par
+  dates = (test_date1 + timedelta(idx + 1)\par
+         for idx in range((test_date2 - test_date1).days))\par
+\par
+# summing all weekdays\par
+  res = sum(1 for day in dates if day.weekday() < 5)\par
+\par
+# printing\par
+  print("Total business days in range : " + str(res))\par
+\par
+\par
+8. ETL Process:\par
+\f1\'b7\f0  Simulate an ETL process using Python that extracts data from a list of\par
+dictionaries, transforms it by normalizing numeric \f2\u976?ields, and loads it into a\par
+Pandas DataFrame.\par
+\f1\'b7\f0  Extend the ETL process to include a validation step that checks for data quality\par
+issues (e.g., missing values, outliers) before loading the data into the DataFrame.\par
+\par
+# create a list of dictionaries with\par
+# student id as key and name as value\par
+import pandas as pd\par
+from sklearn.preprocessing import MinMaxScaler\par
+import numpy as np\par
+\par
+def extract_data(transactions):\par
+    """\par
+    Extracts data from a list of dictionaries.\par
+    """\par
+    return pd.DataFrame(transactions)\par
+\par
+def normalize_numeric_fields(df, numeric_fields):\par
+    """\par
+    Normalizes numeric fields using Min-Max scaling.\par
+    """\par
+    scaler = MinMaxScaler()\par
+    df[numeric_fields] = scaler.fit_transform(df[numeric_fields])\par
+    return df\par
+\par
+def validate_data(df):\par
+    """\par
+    Validates data for quality issues such as missing values and outliers.\par
+    """\par
+    issues = []\par
+\par
+    # Check for missing values\par
+    if df.isnull().values.any():\par
+        issues.append("Missing values detected")\par
+\par
+    # Check for outliers (using z-score)\par
+    z_scores = np.abs((df[numeric_fields] - df[numeric_fields].mean()) / df[numeric_fields].std())\par
+    if (z_scores > 3).any().any():\par
+        issues.append("Outliers detected")\par
+\par
+    return issues\par
+\par
+def load_data(df):\par
+    """\par
+    Loads data into a DataFrame (could be extended to load into a database).\par
+    """\par
+    return df\par
+\par
+# Sample data\par
+transactions = [\par
+    \{'Date': '2024-01-01', 'Product ID': 101, 'Product Name': 'Widget A', 'Quantity Sold': 50, 'Sales Amount': 500, 'Customer ID': 'C001', 'Region': 'North'\},\par
+    \{'Date': '2024-01-01', 'Product ID': 102, 'Product Name': 'Widget B', 'Quantity Sold': 30, 'Sales Amount': 300, 'Customer ID': 'C002', 'Region': 'South'\},\par
+    \{'Date': '2024-02-01', 'Product ID': 101, 'Product Name': 'Widget A', 'Quantity Sold': 70, 'Sales Amount': 700, 'Customer ID': 'C003', 'Region': 'East'\},\par
+    \{'Date': '2024-02-01', 'Product ID': 103, 'Product Name': 'Widget C', 'Quantity Sold': 20, 'Sales Amount': 200, 'Customer ID': 'C001', 'Region': 'West'\},\par
+    \{'Date': '2024-03-01', 'Product ID': 102, 'Product Name': 'Widget B', 'Quantity Sold': 90, 'Sales Amount': 900, 'Customer ID': 'C004', 'Region': 'North'\},\par
+    \{'Date': '2024-04-01', 'Product ID': 101, 'Product Name': 'Widget A', 'Quantity Sold': 80, 'Sales Amount': 800, 'Customer ID': 'C001', 'Region': 'North'\},\par
+]\par
+\par
+# Extract\par
+df = extract_data(transactions)\par
+\par
+# Transform\par
+numeric_fields = ['Quantity Sold', 'Sales Amount']\par
+df_transformed = normalize_numeric_fields(df.copy(), numeric_fields)\par
+\par
+# Validate\par
+issues = validate_data(df_transformed)\par
+if issues:\par
+    print("Data quality issues found:", issues)\par
+else:\par
+    # Load\par
+    final_df = load_data(df_transformed)\par
+    print(final_df)\par
+\par
+\par
+\par
+9. Data Normalization:\par
+\f1\'b7\f0  Write a function that normalizes the values in a DataFrame column to a range \par
+between 0 and 1.\par
+\f1\'b7\f0  Write a function that standardizes the values in a DataFrame column (mean=0, \par
+standard deviation=1).\par
+\par
+import numpy as np\par
+\par
+def NormalizeData(data):\par
+    return (data - np.min(data)) / (np.max(data) - np.min(data))\par
+\par
+transactions = [\par
+    \{'Date': '2024-01-01', 'Product ID': 101, 'Product Name': 'Widget A', 'Quantity Sold': 50, 'Sales Amount': 500, 'Customer ID': 'C001', 'Region': 'North'\},\par
+    \{'Date': '2024-01-01', 'Product ID': 102, 'Product Name': 'Widget B', 'Quantity Sold': 30, 'Sales Amount': 300, 'Customer ID': 'C002', 'Region': 'South'\},\par
+    \{'Date': '2024-02-01', 'Product ID': 101, 'Product Name': 'Widget A', 'Quantity Sold': 70, 'Sales Amount': 700, 'Customer ID': 'C003', 'Region': 'East'\},\par
+    \{'Date': '2024-02-01', 'Product ID': 103, 'Product Name': 'Widget C', 'Quantity Sold': 20, 'Sales Amount': 200, 'Customer ID': 'C001', 'Region': 'West'\},\par
+    \{'Date': '2024-03-01', 'Product ID': 102, 'Product Name': 'Widget B', 'Quantity Sold': 90, 'Sales Amount': 900, 'Customer ID': 'C004', 'Region': 'North'\},\par
+    \{'Date': '2024-04-01', 'Product ID': 101, 'Product Name': 'Widget A', 'Quantity Sold': 80, 'Sales Amount': 800, 'Customer ID': 'C001', 'Region': 'North'\},\par
+]\par
+\par
+t=pd.DataFrame(transactions)\par
+\par
+NormalizeData(t['Sales Amount'])\par
+\par
+def Standardization(data):\par
+   return (t[data] - t[data].mean()) / t[data].std()\par
+\par
+Standardization('Sales Amount')\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+10. Advanced List Comprehensions:\par
+\f1\'b7\f0  Given a list of numbers, create a new list containing the square roots of the even \par
+numbers only, using list comprehension.\par
+\f1\'b7\f0  Given a list of tuples representing (name, score), create a new list containing \par
+names of students who scored above the average, using list comprehension.\par
+\par
+import math\par
+l1=[36,2,4,89,64]\par
+l2=[ math.sqrt(x) for x in l1 if x%2==0]\par
+data = [( 'sravan',94), ( 'ojaswi',62), ( 'bobby',75),\par
+        ( 'rohith',89), ( 'gnanesh',73)]\par
+sum=0\par
+count=0\par
+for i in data:\par
+  sum+=i[1]\par
+  count+=1\par
+avg=sum/count\par
+l3=[i[0] for i in data if i[1]>avg ]\par
+l3\par
+\par
+\par
+23. Recursion:\par
+\f1\'b7\f0  Write a recursive function to calculate the nth Fibonacci number.\par
+\f1\'b7\f0  Write a recursive function to solve the Tower of Hanoi problem.\par
+\par
+\par
+# Recursive function to print the Fibonacci series\par
+def fib(n, prev1, prev2):\par
+    if n < 3:\par
+        return\par
+    fn = prev1 + prev2\par
+    prev2 = prev1\par
+    prev1 = fn\par
+    print(fn, end=" ")\par
+    fib(n - 1, prev1, prev2)\par
+\par
+def print_fib(n):\par
+    \par
+    if n < 1:\par
+        print("Invalid number of terms")\par
+    elif n == 1:\par
+        print(0)\par
+    elif n == 2:\par
+        print("0 1")\par
+    else:\par
+        print("0 1", end=" ")\par
+        fib(n, 1, 0)\par
+\par
+if __name__ == "__main__":\par
+    n = 9\par
+    # Function call\par
+    print_fib(n)\par
+\par
+\par
+# Recursive Python function to solve tower of hanoi\par
+\par
+\par
+def TowerOfHanoi(n, from_rod, to_rod, aux_rod):\par
+    if n == 0:\par
+        return\par
+    TowerOfHanoi(n-1, from_rod, aux_rod, to_rod)\par
+    print("Move disk", n, "from rod", from_rod, "to rod", to_rod)\par
+    TowerOfHanoi(n-1, aux_rod, to_rod, from_rod)\par
+\par
+\par
+# Driver code\par
+N = 3\par
+\par
+# A, C, B are the name of rods\par
+TowerOfHanoi(N, 'A', 'C', 'B')\par
+\par
+\par
+\par
+24. Data Merging:\par
+\f1\'b7\f0  Given two lists of dictionaries, write a function to merge them based on a \par
+common key.\par
+\f1\'b7\f0  Write a function that merges multiple DataFrames based on a common key and \par
+handles con\f2\u976?licts by keeping the most recent data.\par
+\par
+df1 = pd.DataFrame(\{"fruit" : ["apple", "banana",  \par
+                               "avocado", "grape"], \par
+                    "market_price" : [21, 14, 35, 38]\})\par
+df2=pd.DataFrame(\{"fruit" : ["apple", "banana", "grape"], \par
+                    "wholesaler_price" : [65, 68, 71]\}) \par
+df3=pd.merge(df1,df2,on="fruit",how='inner')\par
+df3\par
+\par
+25. Statistical Analysis:\par
+\f1\'b7\f0  Write a function that calculates the mean, median, and mode of a list of numbers.\par
+\f1\'b7\f0  Write a function that calculates the standard deviation and variance of a list of \par
+numbers\par
+\par
+\par
+l1=[36,2,4,89,64,2]\par
+mean=np.mean(l1)\par
+median=np.median(l1)\par
+from scipy import stats\par
+mode=stats.mode(l1)\par
+print(np.var(l1))\par
+print(np.std(l1))\par
+\par
+11. Unit Testing:\par
+\f1\'b7\f0  Write unit tests for a function that calculates the factorial of a number. Use the \par
+unittest framework.\par
+\f1\'b7\f0  Write unit tests for a function that checks if a given string is a palindrome.\par
+\par
+\par
+import unittest\par
+# Python 3 program to find \par
+# factorial of given number\par
+\par
+# Function to find factorial of given number\par
+def factorial(n):\par
+     \par
+    if n == 0:\par
+        return 1\par
+    \par
+    return n * factorial(n-1)\par
+\par
+# Driver Code\par
+\par
+class TestMyFunction(unittest.TestCase):\par
+   def test_function_behavior(self):\par
+       # Arrange\par
+       expected_result = 120\par
+       input_data = 5\par
+       # Act\par
+       actual_result = factorial(input_data)\par
+       # Assert\par
+       self.assertEqual(actual_result, expected_result)\par
+if __name__ == '__main__':\par
+   unittest.main()\par
+\par
+\par
+\par
+def isPalindrome(s):\par
+    return s == s[::-1]\par
+\par
+class TestMyFunction(unittest.TestCase):\par
+   def test_function_behavior(self):\par
+     er=True\par
+     id='malayalam'\par
+     ar=isPalindrome(id)\par
+     self.assertEqual(ar,er)\par
+\par
+if __name__:'__main__':\par
+  unittest.main()\par
+\par
+\par
+\par
+12. Decorators:\par
+\f1\'b7\f0  Create a decorator that logs the execution time of a function. Apply it to a \par
+function that sorts a large list.\par
+\f1\'b7\f0  Create a decorator that retries a function up to 3 times if it raises an exception, \par
+with a delay between retries\par
+\par
+import time\par
+def ct(func):\par
+  def inner1(*args, **kwargs):\par
+    begin = time.time()\par
+    func(*args, **kwargs)\par
+    end=time.time()\par
+    print("time : ",end-begin)\par
+  return inner1\par
+\par
+@ct\par
+def sort(l):\par
+  l.sort()\par
+\par
+l1=[36,2,4,89,64,2]\par
+sort(l1)\par
+\par
+import time\par
+import functools\par
+\par
+def retry(max_retries=3, delay=1):\par
+    def decorator_retry(func):\par
+        @functools.wraps(func)\par
+        def wrapper(*args, **kwargs):\par
+            retries = 0\par
+            while retries < max_retries:\par
+                try:\par
+                    return func(*args, **kwargs)\par
+                except Exception as e:\par
+                    retries += 1\par
+                    if retries >= max_retries:\par
+                        raise\par
+                    print(f"Retrying \{func.__name__\} due to \{e\}. Attempt \{retries\}/\{max_retries\}")\par
+                    time.sleep(delay)\par
+        return wrapper\par
+    return decorator_retry\par
+\par
+# Example usage\par
+@retry(max_retries=3, delay=2)\par
+def test_function():\par
+    print("Trying to execute function")\par
+    raise ValueError("An error occurred")\par
+\par
+try:\par
+    test_function()\par
+except Exception as e:\par
+    print(f"Function failed after retries: \{e\}")\par
+\par
+\par
+\par
+\par
+13. Concurrency with Threads:\par
+\f1\'b7\f0  Write a program that uses threading to calculate the sum of a large list of \par
+numbers by dividing the work among multiple threads.\par
+\f1\'b7\f0  Write a program that uses threading to fetch data from multiple URLs \par
+concurrently and print the status code of each response.\par
+\par
+# Python3 Program to find sum of array\par
+# using multi-threading\par
+from threading import Thread\par
+\par
+# Size of array\par
+MAX = 16\par
+# Maximum number of threads\par
+MAX_THREAD = 4\par
+\par
+# Initial array\par
+arr = [1, 5, 7, 10, 12, 14, 15, 18, 20, 22, 25, 27, 30, 64, 110, 220]\par
+# Sum array for storing sum of each part computed\par
+sum_arr = [0 for _ in range(MAX_THREAD)]\par
+part = 0\par
+\par
+\par
+def sum_array():\par
+\tab global part\par
+\tab thread_part = part\par
+\tab part = part + 1\par
+\par
+\tab # Each thread computes sum of 1/4th of array\par
+\tab thread_start = int(thread_part*(MAX/4))\par
+\tab thread_end = int((thread_part+1)*(MAX/4))\par
+\tab for i in range(thread_start, thread_end, 1):\par
+\tab\tab sum_arr[thread_part] = sum_arr[thread_part] + arr[i]\par
+\par
+\par
+if __name__ == "__main__":\par
+\tab # Creating list of size MAX_THREAD\par
+\tab thread = list(range(MAX_THREAD))\par
+\tab # Creating MAX_THEAD number of threads\par
+\tab for i in range(MAX_THREAD):\par
+\tab\tab thread[i] = Thread(target=sum_array)\par
+\tab\tab thread[i].start()\par
+\par
+\tab # Waiting for all threads to finish\par
+\tab for i in range(MAX_THREAD):\par
+\tab\tab thread[i].join()\par
+\par
+\tab # Adding sum of all 4 parts\par
+\tab actual_sum = 0\par
+\tab for x in sum_arr:\par
+\tab\tab actual_sum = actual_sum + x\par
+\tab print("Sum is %d" % actual_sum)\par
+\par
+\par
+17. Class and Objects:\par
+\f1\'b7\f0  Create a class representing a bank account with methods to deposit, withdraw, \par
+and check balance. Ensure proper error handling for invalid operations.\par
+\f1\'b7\f0  Extend the bank account class to support multiple currencies, with methods to \par
+convert between currencies using a given exchange rate.\par
+\par
+class bank:\par
+  def __init__(self,name,balance) :\par
+      self.name=name\par
+      self.balance=balance\par
+  \par
+  def deposit(self,amount):\par
+    try:\par
+      if amount>0 and amount<100000:\par
+           self.balance+=amount\par
+    except:\par
+      print("Amount invalid")\par
+  def withdraw(self,amount):\par
+    b=self.balance-amount\par
+    \par
+    try:\par
+        \par
+        if(b>=0):self.balance-=amount\par
+    except:\par
+      print("Not enough money to withdraw")\par
+  def checkbalance(self):\par
+    print("balance : ",self.balance)\par
+\par
+  def convert_currency(self, exchange_rate, new_currency):\par
+        self.balance *= exchange_rate\par
+        self.currency = new_currency\par
+        print(f"Converted balance to \{self.balance\} \{self.currency\}")\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+18. Regular Expressions:\par
+\f1\'b7\f0  Write a function that validates email addresses using regular expressions.\par
+\f1\'b7\f0  Write a function that extracts all the dates from a given text string in the format \par
+(DD-MM-YYYY).\par
+\par
+import re\par
+regex = r'\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]\{2,7\}\\b'\par
+\par
+def ve(email):\par
+    if(re.fullmatch(regex,email)):\par
+      print("valid")\par
+    else:\par
+      print("not valid")\par
+\par
+# python code for the above approach\par
+import re\par
+\par
+# String containing in it\par
+str = "The First Version was released on 12-07-2008." \\\par
+\tab "Next Release will might come on 12 July 2009. " \\\par
+\tab "The due date for payment is 2023-09-1." \\\par
+\tab "India gained its freedom on 15 August 1947 which was a Friday." \\\par
+\tab "Republic Day is a public holiday in India where the country marks and celebrates " \\\par
+\tab "the date on which the Constitution of India came into effect on 26-1-1950."\par
+\par
+# You can Add n number of date formats in the below given String Array.\par
+str_pattern = [\par
+\tab "{{\field{\*\fldinst{HYPERLINK "\\\\\\\\d\{2\}-\\\\\\\\d\{2\}-\\\\\\\\d\{4\}"}}{\fldrslt{\\\\d\{2\}-\\\\d\{2\}-\\\\d\{4\}\ul0\cf0}}}}\f0\fs22 ",\par
+\tab\par
+]\par
+\par
+for pattern in str_pattern:\par
+\tab for match in re.finditer(pattern, str):\par
+\tab\tab print(match.group())\par
+\par
+\par
+     \par
+}
+ 

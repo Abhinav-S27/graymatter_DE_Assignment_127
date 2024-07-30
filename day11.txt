@@ -1,0 +1,8 @@
+cloud
+capex and opex
+SLA
+cloud models
+cloud benifits-high availability,scalability,global reach,agility,disaster recovery,fault tolerance,elasticity,customer latency,predictive cost,security
+Resourse group
+Azure basics
+

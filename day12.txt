@@ -1,0 +1,18 @@
+create pipeline
+IR
+LS
+DS
+Activities
+
+IR-Azure auto resolved IR,Self hosted IR,SSIS
+
+storage account-
+access keys
+key vault
+secrets
+access policies
+vault access control
+microsoft integration runtime with rdp
+
+webhook
+webactivity

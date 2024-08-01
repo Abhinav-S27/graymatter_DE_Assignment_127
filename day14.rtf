@@ -1,0 +1,101 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+{\*\listtable 
+{\list\listhybrid
+{\listlevel\levelnfc0\leveljc0\levelstartat1{\leveltext\'02\'00.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc4\leveljc0\levelstartat1{\leveltext\'02\'01.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc3\leveljc0\levelstartat1{\leveltext\'02\'02.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc2\leveljc0\levelstartat1{\leveltext\'02\'03.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc1\leveljc0\levelstartat1{\leveltext\'02\'04.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc0\leveljc0\levelstartat1{\leveltext\'02\'05.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc4\leveljc0\levelstartat1{\leveltext\'02\'06.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc3\leveljc0\levelstartat1{\leveltext\'02\'07.;}{\levelnumbers\'01;}\jclisttab\tx0}
+{\listlevel\levelnfc23\leveljc1\levelstartat1{\leveltext\'01\'B7;}{\levelnumbers;}\f1\jclisttab\tx0}\listid1 }}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\qc\f0\fs32\lang9 Azure cloud services\par
+
+\pard 
+{\listtext\f0\u10625?\tab}\ls1\ilvl8\fi-360\li720\sa200\sl276\slmult1\fs28 CapEx, also known as Capital Expenses, are established as business expenses in the course of creating long-term benefits, specifically, in the future. In other words, this refers to assets that can range from purchasing equipment or an actual infrastructure.\par
+{\listtext\f0 1.\tab}Operating Expenses, or OpEx, are the expenses the business is expected to have in its day-to-day, such as bills, website hosting or domain costs. \par
+
+\pard\sa200\sl276\slmult1 Cloud benifits:\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 high availability,scalability,global reach,agility,disaster recovery,fault tolerance,elasticity,customer latency,predictive cost,security\par
+
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Resource Group : A resource group is a container that holds related resources for an Azure solution. The resource group can include all the resources for the solution, or only those resources that you want to manage as a group. \par
+
+\pard\sa200\sl276\slmult1 Steps Create pipeline:\par
+1.IR : \par
+    In Azure, Integration Runtime (IR) is the compute infrastructure used by Azure Data Factory and Azure Synapse pipelines to provide data integration capabilities across different network environments. \par
+Here are the main types of IR:\par
+\par
+Azure Integration Runtime: This is a fully managed compute environment in Azure. It supports data movement, data flow, and activity dispatch within public networks1.\par
+Self-hosted Integration Runtime: This allows you to run data integration activities on your own infrastructure, supporting data movement and activity dispatch in both public and private networks1.\par
+Azure-SSIS Integration Runtime: This is used to natively execute SQL Server Integration Services (SSIS) packages in a managed Azure environment1.\par
+2.LS :\par
+   Linked service in Azure Data Factory is the connection mechanism to connect to the external source outside the ADF. It works as the connection string to hold the user authentication information.\par
+3. Dataset : \par
+  A Dataset is a reference to a data store and provides a very specific pointer to an object within the Linked Service. E.g. If a Linked Service points to a Database instance, the dataset can refer to a specific table that we would like to use as source or sink in the Data Factory Pipeline.\par
+4.Activities : \par
+    Azure Data Factory uses activities to define the actions that are performed on your data. Activities can be used to move data, transform data, or control the flow of data processing. \par
+\par
+\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Storage account : \par
+
+\pard\sa200\sl276\slmult1  A storage account in Microsoft Azure is a cloud-based storage solution that provides highly available, secure, durable, and scalable storage. Azure Storage accounts are used to store data objects such as blobs, files, queues, tables, and disks. They are fundamental building blocks for many Azure services and applications.\par
+\par
+Here are the primary types of storage available within an Azure Storage account:\par
+\par
+Blob Storage: Azure Blob Storage is optimized for storing large amounts of unstructured data, such as text or binary data. It is designed for serving images or documents directly to a browser, storing files for distributed access, streaming video and audio, and backup and restore scenarios.\par
+Blob storage includes:\par
+
+\pard 
+{\pntext\f0 i.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pnlcrm{\pntxta.}}
+\fi-360\li720\sa200\sl276\slmult1 Block Blobs: Used for storing text and binary data.\par
+{\pntext\f0 ii.\tab}Append Blobs: Optimized for append operations, such as logging.\par
+{\pntext\f0 iii.\tab}Page Blobs: Used for random read/write operations and commonly used as virtual hard drives for VMs.\par
+
+\pard\sa200\sl276\slmult1 File Storage: Azure Files provides fully managed file shares in the cloud that are accessible via the standard Server Message Block (SMB) protocol. It can be mounted concurrently by cloud or on-premises deployments and enables file-based storage solutions.\par
+Queue Storage: Azure Queue Storage provides a messaging system for asynchronous communication between application components. This can be useful for creating decoupled architectures where components communicate via messages stored in queues.\par
+Table Storage: Azure Table Storage offers a NoSQL key-value store for rapid development using massive semi-structured datasets. It's designed for applications needing flexible data schemas, like user data for web applications.\par
+Disk Storage: Azure Disk Storage provides persistent, highly durable, and high-performance block storage for Azure virtual machines (VMs). It supports both HDD and SSD options to cater to different performance and cost requirements.\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Azure Key Vault : A cloud service for securely storing and accessing secrets, keys, and certificates. It helps safeguard cryptographic keys and secrets used by cloud applications and services, offering secure and centralized management.\par
+{\pntext\f1\'B7\tab}Secrets : In Azure, "secrets" refer to pieces of sensitive information that are stored securely and managed using Azure Key Vault. Secrets can include passwords, API keys, connection strings, tokens, and any other confidential data that your applications or services need to operate securely.\par
+
+\pard\sa200\sl276\slmult1 Activities:\par
+1. GetMetadata Activity\par
+Retrieves metadata information such as structure, size, and last modified date from a data source.\par
+2. Lookup Activity\par
+Reads and returns content from a dataset, often used to fetch configuration or small sets of data for control flow logic.\par
+3. ForEach Activity\par
+Iterates over a collection and executes specified activities for each item in the collection.\par
+4. Filter Activity\par
+Applies a condition to a dataset to return only the items that meet the specified criteria.\par
+5. Data Flows\par
+Provides a visual interface for designing complex data transformation logic using the Apache Spark engine.\par
+\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Triggers:\par
+
+\pard\sa200\sl276\slmult1 A trigger in Azure Data Factory initiates the execution of a pipeline. Triggers can be set up based on various events or schedules, ensuring that data workflows are automated and run at the right times or under specific conditions.\par
+Storage Account Trigger\par
+A Storage Account Trigger (or event-based trigger) in Azure Data Factory is used to start a pipeline when a blob is created or deleted in an Azure Storage account.\par
+Use Case: Automatically process or analyze new data files as soon as they are uploaded to a storage container.\par
+Example: Triggering a data pipeline when a new CSV file is uploaded to an Azure Blob Storage container.\par
+Schedule Trigger\par
+A Schedule Trigger in Azure Data Factory is used to run a pipeline on a predefined schedule. This can be set to run at regular intervals, such as hourly, daily, weekly, etc.\par
+Use Case: Running ETL processes at regular intervals to ensure data is up-to-date.\par
+Example: Scheduling a data pipeline to run every night at midnight to update a data warehouse.\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+\fs22\par
+}
+ 
